@@ -11,7 +11,7 @@ class CurrencyConverterService(ABC):
         self,
         base: str,
         quote: str,
-        date: datetime.datetime | datetime.date | None,
+        date: datetime.datetime | datetime.date | None = None,
     ) -> float:
         '''
         Get the exchange rate between the base and quote currencies
