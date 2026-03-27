@@ -20,7 +20,8 @@ class CurrencyConverterService(ABC):
         and quote currencies. A date or datetime object can optionally be
         supplied to use a historical exchange rate. By default, if no date is
         supplied, the most recent close value is used. For historical data,
-        the close value on or before the supplied date is used.
+        the close value on or before the supplied date is used. An exception
+        should be thrown if no exchange rate is found.
 
         Parameters
         ----------
