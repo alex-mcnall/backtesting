@@ -7,5 +7,5 @@ class CurrencyConverterService(ABC):
     service class must adhere to.
     '''
     @abstractmethod
-    def convert(self, base: str, quote: str, date: datetime.datetime | datetime.date | None):
+    def get_exchange_rate(self, base: str, quote: str, date: datetime.datetime | datetime.date | None):
         raise NotImplementedError
