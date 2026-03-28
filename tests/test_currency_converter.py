@@ -25,3 +25,9 @@ def test_service():
     converter = CurrencyConverter()
     converter.service = "yfinance"
     assert converter.service == "yfinance"
+
+def test_unknown_service():
+    '''Check that unknown services give a ValueError'''
+    converter = CurrencyConverter()
+    with pytest.raises(ValueError):
+        converter.service = "Does not exist."
