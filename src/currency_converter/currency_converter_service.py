@@ -27,9 +27,9 @@ class CurrencyConverterService(ABC):
         ----------
         base : str
             The currency that the value is being converted from.
-        quote: str
+        quote : str
             The currency that the value is being converted to.
-        date: {date, datetime, None}, optional
+        date : {date, datetime, None}, optional
             The time to use for the exchange rate. If None, then default to
             the most recent exchange rate.
 
