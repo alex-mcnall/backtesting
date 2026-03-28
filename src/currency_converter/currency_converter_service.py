@@ -1,4 +1,4 @@
-import datetime
+import datetime, numpy
 from abc import ABC, abstractmethod
 
 class CurrencyConverterService(ABC):
@@ -12,7 +12,7 @@ class CurrencyConverterService(ABC):
         base: str,
         quote: str,
         date: datetime.datetime | datetime.date | None = None,
-    ) -> float:
+    ) -> numpy.floating:
         '''
         Get the exchange rate between the base and quote currencies
 
