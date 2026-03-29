@@ -3,7 +3,7 @@ from unittest import mock
 
 import pytest
 
-from currency_converter.currency_converter import CurrencyConverter
+from currency_converter import CurrencyConverter
 
 
 @mock.patch("currency_converter.yahoo_finance_converter.YahooFinanceConverter.get_exchange_rate")
