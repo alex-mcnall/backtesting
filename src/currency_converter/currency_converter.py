@@ -1,6 +1,6 @@
 import datetime
 
-from yahoo_finance_converter import YahooFinanceConverter
+from .yahoo_finance_converter import YahooFinanceConverter
 
 
 class CurrencyConverter():

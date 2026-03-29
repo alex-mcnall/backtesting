@@ -2,7 +2,7 @@ import datetime
 
 import yfinance
 
-from currency_converter_service import CurrencyConverterService
+from .currency_converter_service import CurrencyConverterService
 
 class YahooFinanceConverter(CurrencyConverterService):
     '''

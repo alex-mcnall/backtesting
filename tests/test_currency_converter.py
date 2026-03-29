@@ -3,10 +3,10 @@ from unittest import mock
 
 import pytest
 
-from currency_converter import CurrencyConverter
+from currency_converter.currency_converter import CurrencyConverter
 
 
-@mock.patch("yahoo_finance_converter.YahooFinanceConverter.get_exchange_rate")
+@mock.patch("currency_converter.yahoo_finance_converter.YahooFinanceConverter.get_exchange_rate")
 def test_convert(mock_get_exchange_rate):
     '''
     Test that the returned value uses the exchange rate given by a stub
