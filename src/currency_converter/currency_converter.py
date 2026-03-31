@@ -1,7 +1,10 @@
 import datetime
+from importlib import import_module
+from importlib.util import find_spec
 
-from .yahoo_finance_converter import YahooFinanceConverter
+from inspect import getmembers, isabstract, isclass
 
+from .currency_converter_service import CurrencyConverterService
 
 class CurrencyConverter():
     '''
@@ -43,9 +46,6 @@ class CurrencyConverter():
     >>> c
     np.float64(124.63078498840332)
     '''
-    _services = {
-            "yfinance": YahooFinanceConverter
-            }
     _default_service = "yfinance"
 
     def __init__(self, service: str = _default_service):
@@ -60,15 +60,31 @@ class CurrencyConverter():
     @service.setter
     def service(self, service: str = _default_service):
         '''Recovers the service class and sets the name'''
-        # Check if the service is a valid one
-        if service in self._services:
-            # Recover the service class
-            self._service = self._services.get(service)
+        # Only allow imports from inside the currency converter package
+        if not (service.isalpha() and service.islower()):
+            raise ValueError("Currency converter name is invalid.",
+            f"Expected lower case letters only, but got {service}")
+
+        # Import module if it exists
+        if find_spec(service):
+            # Programatically import the specified backend
+            module = import_module("." + service, __package__)
+
+            # Find the converter service class
+            classes = getmembers(
+                module,
+                lambda c: (
+                isclass(c)
+                and not isabstract(c)
+                and issubclass(c, CurrencyConverterService)
+                )
+            )
+
+            # Recover the (first) class based on the abstract base class
+            self._service = classes[0][1]
 
             # Set the service name string
             self._service_name = service
-        else:
-            raise ValueError(f"Unknown currency converter service: {service}")
 
     def convert(
         self,

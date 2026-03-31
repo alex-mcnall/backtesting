@@ -2,7 +2,7 @@ import datetime, numpy
 
 import pytest, yfinance
 
-from currency_converter.yahoo_finance_converter import YahooFinanceConverter
+from currency_converter.yfinance import YahooFinanceConverter
 
 def test_symbol_lookup_gbpusd():
     '''Test the symbol lookup for GBP to USD works'''

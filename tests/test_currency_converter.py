@@ -6,7 +6,7 @@ import pytest
 from currency_converter import CurrencyConverter
 
 
-@mock.patch("currency_converter.yahoo_finance_converter.YahooFinanceConverter.get_exchange_rate")
+@mock.patch("currency_converter.yfinance.YahooFinanceConverter.get_exchange_rate")
 def test_convert(mock_get_exchange_rate):
     '''
     Test that the returned value uses the exchange rate given by a stub
@@ -27,7 +27,20 @@ def test_service():
     assert converter.service == "yfinance"
 
 def test_unknown_service():
-    '''Check that unknown services give a ValueError'''
+    '''Check that unknown services give a ValueError.'''
+    converter = CurrencyConverter()
+    with pytest.raises(ModuleNotFoundError):
+        converter.service = "random"
+
+def test_invalid_service_name():
+    '''
+    Check that service names containing non-alpha characters give a
+    ModuleNotFoundError.
+    '''
     converter = CurrencyConverter()
     with pytest.raises(ValueError):
-        converter.service = "Does not exist."
+        converter.service = "Does not exist"
+    with pytest.raises(ValueError):
+        converter.service = "Y.finance"
+    with pytest.raises(ValueError):
+        converter.service = "y-finance"
