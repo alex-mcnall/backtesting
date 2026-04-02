@@ -27,3 +27,7 @@ jobs:
         run: |
           pip install pytest
           pytest tests/
+
+      - name: Check code coverage
+        run: |
+          pytest --cov-report=term-missing:skip-covered --cov-report=markdown-append:$GITHUB_STEP_SUMMARY --cov=src tests/
