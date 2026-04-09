@@ -8,6 +8,10 @@ on:
 
 jobs:
   Test:
+    permissions:
+      contents: read
+      issues: none
+      pull-requests: none
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
