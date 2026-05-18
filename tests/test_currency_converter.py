@@ -22,25 +22,17 @@ def test_service():
     Test that the service is assigned correctly and returns the string that
     identifies it (rather than the class itself).
     '''
-    converter = CurrencyConverter()
-    converter.service = "yfinance"
+    converter = CurrencyConverter("yfinance")
     assert converter.service == "yfinance"
 
 def test_unknown_service():
     '''Check that unknown services give a ValueError.'''
     converter = CurrencyConverter()
-    with pytest.raises(ModuleNotFoundError):
-        converter.service = "random"
-
-def test_invalid_service_name():
-    '''
-    Check that service names containing non-alpha characters give a
-    ModuleNotFoundError.
-    '''
-    converter = CurrencyConverter()
     with pytest.raises(ValueError):
-        converter.service = "Does not exist"
+        CurrencyConverter("random")
     with pytest.raises(ValueError):
-        converter.service = "Y.finance"
+        CurrencyConverter("Does not exist")
     with pytest.raises(ValueError):
-        converter.service = "y-finance"
+        CurrencyConverter("Y.finance")
+    with pytest.raises(ValueError):
+        CurrencyConverter("y-finance")

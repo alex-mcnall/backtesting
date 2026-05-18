@@ -2,12 +2,15 @@ import datetime
 
 import yfinance
 
-from .currency_converter_service import CurrencyConverterService
+from .currency_converter import CurrencyConverter
 
-class YahooFinanceConverter(CurrencyConverterService):
+class YahooFinanceConverter(CurrencyConverter):
     '''
     Use the yfinance module to get currency conversion rates using Yahoo Finance's forex data.
     '''
+    # Allow users to refer to this converter as "yfinance"
+    _service_key = "yfinance"
+
     @staticmethod
     def _identify_ticker(base: str, quote: str) -> str:
         '''
